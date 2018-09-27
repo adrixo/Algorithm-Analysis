@@ -5,13 +5,27 @@ CC = gcc
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-
+#Miscelanea
 summationAlgorithms_Test: tests/summationAlgorithms_Test.c
 	$(CC) -o summationAlgorithms_Test.exe tests/summationAlgorithms_Test.c
 
-bubbleSort_Test: tests/exampleBubble_Test.c utils/array.o sortingAlgorithm/bubbleSort.o
-	$(CC) -o bubble_Test.exe tests/exampleBubble_Test.c utils/array.o sortingAlgorithm/bubbleSort.o
+productFunctions_Test: tests/productFunctions_Test.c
+	$(CC) -o productFunctions_Test.exe tests/productFunctions_Test.c
+
+##/Miscelanea
+
+
+#Sort algorithms
+bubbleSort_Test: tests/bubbleSort_Test.c utils/array.o src/sortingAlgorithm/bubbleSort.o
+	$(CC) -o bubbleSort_Test.exe tests/bubbleSort_Test.c utils/array.o src/sortingAlgorithm/bubbleSort.o
+
+#Search algorithms
+
+#
+timeCountingBase: tests/timeCountingBase.c utils/array.o src/XX/XX.o
+	$(CC) -o timeCountingBase.exe tests/timeCountingBase.c utils/array.o src/XX/XX.o
 
 clean:
 	find . -name "*.o" -type f -delete
 	find . -name "*.exe" -type f -delete
+	find . -name "*.txt" -type f -delete

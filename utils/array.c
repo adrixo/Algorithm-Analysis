@@ -49,22 +49,24 @@ void printArray(int * array, int length, char *name)
 }
 
 //The second field has 5 decimals, for the clock
-void createArrayFile(double ** array, int x, int y, char * topbar, char * fileName)
+void createArrayFileFromMatrix(double ** array, int x, int y, char * topbar, char * fileName)
 {
   FILE *f;
   int i, j, type;
+  char fileNameWithExtension[256];
 
-  f = fopen(fileName, "w+");
+  sprintf(fileNameWithExtension, "%s.txt", fileName);
+  f = fopen(fileNameWithExtension, "w+");
   fprintf(f,topbar);
 
   for(i=0; i<x; i++)
   {
     for(j=0;j<(y-1);j++)
     {
-      if(j==1)
+      if(j==1 || j==3)
         fprintf(f, "%f; ", array[i][j]);
       else
-        fprintf(f, "%.2f; ", array[i][j]);
+        fprintf(f, "%.0f; ", array[i][j]);
     }
     if(j==1)
       fprintf(f, "%f \n", array[i][y-1]);

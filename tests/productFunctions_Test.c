@@ -5,19 +5,19 @@
 #include "../src/studyFunctions/productFunctions.c"
 
 #define TESTS 5
-#define FUNCTIONS 3
+#define FUNCTIONS 4
 
 char *names[] = {
   "classicProduct",
   "russianProduct",
-  //"divideAndConquerProduct",
+  "divideAndConquerProduct",
   "iterativeProduct"
 };
 
 int(*algorithms[])(int, int, int *) = {
   &classicProduct,
   &russianProduct,
-  //&divideAndConquerProduct,
+  &divideAndConquerProduct,
   &iterativeProduct
 };
 

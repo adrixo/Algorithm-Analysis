@@ -1,7 +1,7 @@
 
 int recursiveFactorial(int n)
 {
-  if(n == 1)
+  if(n <= 1)
     return 1;
 
   return recursiveFactorial(n-1)*n;
@@ -84,6 +84,6 @@ int algoritm(int *array, int bot, int top, int nElements)
   if( k>1 && array[k-1]>array[k] )
     return algoritm(array, bot, k-1, nElements);
 
-return algoritm(array, k+1, k, nElements);
+  return algoritm(array, k+1, top, nElements);
 
 }

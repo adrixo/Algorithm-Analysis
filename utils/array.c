@@ -4,6 +4,13 @@
 
 #include "array.h"
 
+/*aleatorio
+aleatorio sin repetidos
+orden ascendente
+orden descendente
+aleatorio sin repeascendente
+aleatorio sinrepe ascendente */
+
 int * createArrayRandomNumbers(int n, int max)
 {
   srand((unsigned) time(NULL));
@@ -18,6 +25,73 @@ int * createArrayRandomNumbers(int n, int max)
 
   for(i = 0; i < n; i++)
     array[i] = rand() % max;
+
+  return array;
+}
+
+int * createSortedArrayRandomNumbers(int n, int max)
+{
+  int * array = createArrayRandomNumbers(n, max);
+
+  void swap(int *x, int *y){
+    int aux = *x;
+    *x = *y;
+    *y = aux;
+  }
+
+  void bubbleSort(int *array, int length){
+    for(int i = 0; i < length-1; i++)
+      for(int j = 0; j < length-i-1; j++)
+        if( array[j] > array[j+1])
+          swap(&array[j], &array[j+1]);
+  }
+
+  bubbleSort(array, n)
+
+  return array;
+}
+
+void reverseArray(int *array, int length)
+{
+  int aux;
+  for(int i = 0; i<length/2; i++)
+  {
+    aux = array[i];
+    array[i] = array[n-i-1];
+    array[n-i-1] = aux;
+  }
+}
+
+int * createSortedArray(int n)
+{
+
+  int * array, i;
+  array = (int *) malloc (n*sizeof(int));
+  if(array == NULL)
+  {
+    printf("createArray: error in malloc\n");
+    return NULL;
+  }
+
+  for(i = 0; i < n; i++)
+    array[i] = i;
+
+  return array;
+}
+
+int * createSortedArrayReversed(int n)
+{
+
+  int * array, i;
+  array = (int *) malloc (n*sizeof(int));
+  if(array == NULL)
+  {
+    printf("createArray: error in malloc\n");
+    return NULL;
+  }
+
+  for(i = n-1; i >= 0; i--)
+    array[i] = i;
 
   return array;
 }

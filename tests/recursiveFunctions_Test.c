@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "../src/studyFunctions/productFunctions.c"
+#include "../src/studyFunctions/recursiveFunctions.c"
 
 #define TESTS 5
 #define FUNCTIONS 6
@@ -16,7 +16,7 @@ char *names[] = {
   "iterativePow"
 };
 
-int(*algorithms[])(int, int) = {
+double(*algorithms[])(double, double, int*) = {
   &recursiveFactorial,
   &iterativeFactorial,
   &recursiveFibonacci,
@@ -25,31 +25,41 @@ int(*algorithms[])(int, int) = {
   &iterativePow
 };
 
-int MR[TESTS] = {12, 123, 1234, 12345, 123456};
-int MO[TESTS] = {24, 456, 5678, 67891, 789123};
+int linear[TESTS] = {20, 25, 30, 35, 40};
+int exponent[TESTS] = {16, 32, 48, 64, 80};
+
 
 void main(void)
 {
   clock_t clock_start, clock_end;
   double clock_total;
-  int i, j, repetitions, result;
-  int mr, mo;
+  int i, j, repetitions=0;
+  double result;
+  int e, l;
 
   for(i=0; i<FUNCTIONS; i++){
     printf("\nFunction: %s\n",names[i]);
     for(j=0; j<TESTS; j++)
     {
-      mr = MR[j];
-      mo = MO[j];
+      repetitions = 0;
+      l = linear[j];
+      e = exponent[j];
 
       clock_start = clock();
 
-      result = (*algorithms[i])(mr, mo, &repetitions);
+      if(i<4)
+        result = (*algorithms[i])(l, 0, &repetitions);
+      else
+        result = (*algorithms[i])(2, e, &repetitions);
 
       clock_end = clock();
       clock_total = (clock_end - clock_start) / (double) CLOCKS_PER_SEC;
 
-      printf("%d: %10d*%-10d = %-10d\tn: %-10dclock: %f\tRepetitions in 1s: %.2f\n", i+1, mr, mo, result, repetitions, clock_total, 1/clock_total);
+
+      if(i<4)
+        printf("%d: n:%10d = %-50.f\trepetitions: %-10dclock: %f\tRepetitions in 1s: %.2f\n", i+1, l, result, repetitions, clock_total, 1/clock_total);
+      else
+        printf("%d: 2^%10d = %-25.f\trepetitions: %-10dclock: %f\tRepetitions in 1s: %.2f\n", i+1, e, result, repetitions, clock_total, 1/clock_total);
     }
     printf("\n");
   }

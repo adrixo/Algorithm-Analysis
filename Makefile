@@ -12,6 +12,8 @@ summationAlgorithms_Test: tests/summationAlgorithms_Test.c
 productFunctions_Test: tests/productFunctions_Test.c
 	$(CC) -o productFunctions_Test.exe tests/productFunctions_Test.c
 
+RecursiveFunctions_Test: tests/recursiveFunctions_Test.c
+	$(CC) -o recursiveFunctions_Test.exe tests/recursiveFunctions_Test.c
 ##/Miscelanea
 
 

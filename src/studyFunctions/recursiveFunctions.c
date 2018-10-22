@@ -1,56 +1,69 @@
 
-int recursiveFactorial(int n)
+double recursiveFactorial(double n, double p, int *repetitions) //Int p: unused, just for test implementation
 {
+  *repetitions += 1;
+
   if(n <= 1)
     return 1;
 
-  return recursiveFactorial(n-1)*n;
+  return recursiveFactorial(n-1,p,repetitions)*n;
 }
 
-int iterativeFactorial(int n)
+double iterativeFactorial(double n, double p, int *repetitions) //Int p: unused, just for test implementation
 {
-  int result = 1;
+  double result = 1;
   while(n > 1)
   {
+  *repetitions += 1;
     result = result * n;
     n--;
   }
   return result;
 }
 
-int recursiveFibonacci(int n)
+double recursiveFibonacci(double n, double p, int *repetitions) //Int p: unused, just for test implementation
 {
+  *repetitions += 1;
+
   if(n<2)
     return 1;
 
-  return recursiveFibonacci(n-2) + recursiveFibonacci(n-1);
+  return recursiveFibonacci(n-2,p,repetitions) + recursiveFibonacci(n-1,p,repetitions);
 }
 
-int iterativeFibonacci(int n)
+double iterativeFibonacci(double n, double p, int *repetitions) //Int p: unused, just for test implementation
 {
-  int x=0, y=1, aux;
+  *repetitions = 0;
+
+  double x=0, y=1, aux;
   for(int i=0; i<n; i++)
   {
+    *repetitions += 1;
     aux = x;
     x = x + y;
     y = aux;
   }
-  return x
+  return x;
 }
 
-int recursivePow(int n, int p)
+double recursivePow(double n, double p, int *repetitions) //Int p: unused, just for test implementation
 {
+  *repetitions += 1;
+
   if(p==1)
     return n;
 
-  return recursivePow(n, p-1) * n;
+  return recursivePow(n, p-1, repetitions) * n;
 }
 
-int iterativePow(int n, int p)
+double iterativePow(double n, double p, int *repetitions)
 {
-  int result = 1;
+  *repetitions = 0;
+
+  double result = 1;
   while(p > 0)
   {
+    *repetitions += 1;
     result *= n;
     p--;
   }
@@ -73,7 +86,7 @@ int mergeFindMax(int *array, int bot, int top)
 
 }
 
-int algoritm(int *array, int bot, int top, int nElements)
+int findMountain(int *array, int bot, int top, int nElements)
 {
   int k = (bot+top)/2;
 
@@ -82,8 +95,8 @@ int algoritm(int *array, int bot, int top, int nElements)
       return k;
 
   if( k>1 && array[k-1]>array[k] )
-    return algoritm(array, bot, k-1, nElements);
+    return findMountain(array, bot, k-1, nElements);
 
-  return algoritm(array, k+1, top, nElements);
+  return findMountain(array, k+1, top, nElements);
 
 }

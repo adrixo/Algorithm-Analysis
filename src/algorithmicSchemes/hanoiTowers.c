@@ -1,4 +1,4 @@
-
+/*Tail recursion example*/
 int hanoi(int numberOfDisks, int origin, int destination, int aux)
 {
   if( n>0 )

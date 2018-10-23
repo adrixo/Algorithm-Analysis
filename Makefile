@@ -6,22 +6,29 @@ CC = gcc
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 #Miscelanea
-summationAlgorithms_Test: tests/summationAlgorithms_Test.c
-	$(CC) -o summationAlgorithms_Test.exe tests/summationAlgorithms_Test.c
+summationAlgorithms_Test: tests/studyFunctions/summationAlgorithms_Test.c
+	$(CC) -o summationAlgorithms_Test.exe tests/studyFunctions/summationAlgorithms_Test.c
 
-productFunctions_Test: tests/productFunctions_Test.c
-	$(CC) -o productFunctions_Test.exe tests/productFunctions_Test.c
+productFunctions_Test: tests/studyFunctions/productFunctions_Test.c
+	$(CC) -o productFunctions_Test.exe tests/studyFunctions/productFunctions_Test.c
 
-RecursiveFunctions_Test: tests/recursiveFunctions_Test.c
-	$(CC) -o recursiveFunctions_Test.exe tests/recursiveFunctions_Test.c
+RecursiveFunctions_Test: tests/studyFunctions/recursiveFunctions_Test.c
+	$(CC) -o recursiveFunctions_Test.exe tests/studyFunctions/recursiveFunctions_Test.c
 ##/Miscelanea
 
 
-#Sort algorithms
-bubbleSort_Test: tests/bubbleSort_Test.c utils/array.o src/sortingAlgorithm/bubbleSort.o
-	$(CC) -o bubbleSort_Test.exe tests/bubbleSort_Test.c utils/array.o src/sortingAlgorithm/bubbleSort.o
-
 #Search algorithms
+
+#
+
+#Sorting algorithms
+bubbleSort_Test: tests/sortingAlgorithm/bubbleSort_Test.c utils/array.o src/sortingAlgorithm/bubbleSort.o
+	$(CC) -o bubbleSort_Test.exe tests/sortingAlgorithm/bubbleSort_Test.c utils/array.o src/sortingAlgorithm/sortingAlgorithm/bubbleSort.o
+
+
+#Algorithmic schemes
+greedyAlgorithms_Test: tests/algorithmicSchemes/greedyAlgorithms_Test.c
+	$(CC) -o greedyAlgorithms_Test.exe tests/algorithmicSchemes/greedyAlgorithms_Test.c 
 
 #
 timeCountingBase: tests/timeCountingBase.c utils/array.o src/XX/XX.o

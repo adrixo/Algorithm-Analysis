@@ -5,8 +5,8 @@
 #include <time.h>
 #include <string.h>
 
-#include "../utils/array.h"
-#include "../src/sortingAlgorithm/bubbleSort.h"
+#include "../../utils/array.h"
+#include "../../src/sortingAlgorithm/bubbleSort.h"
 
 #define TESTS 12
 #define REPETITIONS 20

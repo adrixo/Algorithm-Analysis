@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "../src/studyFunctions/productFunctions.c"
+#include "../../src/studyFunctions/productFunctions.c"
 
 #define TESTS 5
 #define FUNCTIONS 4

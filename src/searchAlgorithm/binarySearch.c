@@ -40,3 +40,25 @@ int recursivebinarySearch(int *array, int bot, int top, int value, int * repetit
 
   return recursivebinarySearch(array, bot, top, value, repetitions);
 }
+
+int binarySearch(int *array, int length, int value, int *repetitions)
+{
+  int i=0, j=length;
+  int k;
+  *repetitions = 0;
+
+  while(i<j)
+  {
+    *repetitions++;
+    k = (i+j)/2;
+
+    if(array[k]<value)
+      j = k-1;
+    if(array[k]>value)
+      i = k+1;
+    if(array[k]==value)
+      return k;
+  }
+
+  return k;
+}

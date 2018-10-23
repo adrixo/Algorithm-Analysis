@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "../src/studyFunctions/recursiveFunctions.c"
+#include "../../src/studyFunctions/recursiveFunctions.c"
 
 #define TESTS 5
 #define FUNCTIONS 6

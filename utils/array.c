@@ -129,7 +129,7 @@ void createArrayFileFromMatrix(double ** array, int x, int y, char * topbar, cha
   int i, j, type;
   char fileNameWithExtension[256];
 
-  sprintf(fileNameWithExtension, "%s.txt", fileName);
+  sprintf(fileNameWithExtension, "results/%s.txt", fileName);
   f = fopen(fileNameWithExtension, "w+");
   fprintf(f,topbar);
 

@@ -53,15 +53,10 @@ void main(void)
     timeAverrage[i][2] = internalCounter; //number of operations on the third
 
     //And number that times that an algorithm can be run in 1s (1/timeAverrage)
-    timeAverrage[i][4] =  timeAverrage[i][1];
-    timeAverrage[i][3] = 0;
-    while(timeAverrage[i][4] < 1)
-    {
-      timeAverrage[i][4] += timeAverrage[i][1];
-      //timeAverrage[i][3]++;
-    }
+    timeAverrage[i][3] =  1/timeAverrage[i][1];
 
-    printf("\tArraySize: %d\t\tInternalCounter: %10d\t\tClock: %f\t\tRepetions in 10s: %f\n", testSize[i], internalCounter, timeAverrage[i][0], CLOCKS_PER_SEC);
     createArrayFileFromMatrix(timeAverrage, TESTS, 4, "array size ;clock average ;internal counter ;executions in 1 s\n", "Bubble sort");
+    printf("\tArraySize: %.0f\t\tInternalCounter: %10.0f\t\tClock: %f\t\tRepetions in 1s: %f\n"
+          , timeAverrage[i][0], timeAverrage[i][2], timeAverrage[i][1],  timeAverrage[i][3]);
   }
 }

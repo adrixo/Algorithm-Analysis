@@ -1,6 +1,5 @@
-#ifndef __BINARYSEARCH_H
-#define __BINARYSEARCH_H
-
+#ifndef __X_NARYSEARCH_H
+#define __X_NARYSEARCH_H
 
 int ternarySearch(int *array, int length, int value, int *repetitions);
 int recursiveTernarySearch(int *array, int bot, int top, int value, int * repetitions);

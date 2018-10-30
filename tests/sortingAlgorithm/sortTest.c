@@ -5,10 +5,10 @@
 #include <time.h>
 #include <string.h>
 
-#include "../../src/sortingAlgorithm/selectionSort.c"
+#include "../../src/sortingAlgorithm/quickSort.c"
 #include "../../utils/array.c"
 
-#define ARRAYSIZE 10
+#define ARRAYSIZE 100
 
 void main(void)
 {
@@ -23,11 +23,12 @@ void main(void)
 
   printArray(array, ARRAYSIZE, "Sort test, 1.");
   clock_start = clock();
-  internalCounter = selectionSort( array, ARRAYSIZE);    clock_end = clock();
+  internalCounter = quickSortImproved( array,0, ARRAYSIZE-1);    clock_end = clock();
   clock_end = clock();
 
   clock_total = (clock_end - clock_start) / (double) CLOCKS_PER_SEC;
   printArray(array, ARRAYSIZE, "Sort test, 2.");
+  printf("Repetitions: %d\n", internalCounter);
 
   free(array);
 

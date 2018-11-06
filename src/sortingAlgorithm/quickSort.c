@@ -58,14 +58,14 @@ int quickSortImproved(int *array, int bot, int top){
       j--;
       c++;
     }
-  } while(i>=j);
+  } while(i<=j);
 
   if(bot<j){
-    return c + quickSortImproved(array, bot, j);
+    c = c + quickSortImproved(array, bot, j);
   }
 
-  if(bot>i){
-    return c + quickSortImproved(array, i, top);
+  if(top>i){
+    c = c + quickSortImproved(array, i, top);
   }
   return c;
 }

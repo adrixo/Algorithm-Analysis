@@ -9,7 +9,7 @@
 #include "../../src/sortingAlgorithm/quickSort.c"
 
 #define TESTS 12
-#define REPETITIONS 20000
+#define REPETITIONS 100
 
 void main(void)
 {
@@ -55,7 +55,41 @@ void main(void)
     //And number that times that an algorithm can be run in 1s (1/timeAverrage)
     timeAverrage[i][3] =  1/timeAverrage[i][1];
 
-    createArrayFileFromMatrix(timeAverrage, TESTS, 4, "array size ;clock average ;internal counter ;executions in 1 s\n", "Simple quick sort");
+    createArrayFileFromMatrix(timeAverrage, TESTS, 4, "array size ;clock average ;internal counter ;executions in 1 s\n", "quick sort simple");
+    printf("\tArraySize: %.0f\t\tInternalCounter: %10.0f\t\tClock: %f\t\tRepetions in 1s: %f\n"
+          , timeAverrage[i][0], timeAverrage[i][2], timeAverrage[i][1],  timeAverrage[i][3]);
+  }
+
+  printf("\nQuick Sort mid pivot: \n\n");
+
+  for(i=0; i<TESTS; i++)
+  {
+    for(j=0; j<REPETITIONS; j++) //we want the average of the total clock
+    {
+      array = createArrayRandomNumbers(testSize[i], testSize[i]);
+
+      clock_start = clock();
+      internalCounter = quickSortImproved( array, 0,testSize[i]);
+      clock_end = clock();
+
+      clock_total = (clock_end - clock_start) / (double) CLOCKS_PER_SEC;
+      timeAverrage[i][j] = clock_total;
+      free(array);
+    }
+
+    //calc of time average and prepare the matrix
+    for(j=1; j<REPETITIONS; j++)
+      timeAverrage[i][0] += timeAverrage[i][j];
+    timeAverrage[i][0] /= REPETITIONS;
+
+    timeAverrage[i][1] = timeAverrage[i][0]; //time average on the second
+    timeAverrage[i][0] = testSize[i];  //Array size on the first
+    timeAverrage[i][2] = internalCounter; //number of operations on the third
+
+    //And number that times that an algorithm can be run in 1s (1/timeAverrage)
+    timeAverrage[i][3] =  1/timeAverrage[i][1];
+
+    createArrayFileFromMatrix(timeAverrage, TESTS, 4, "array size ;clock average ;internal counter ;executions in 1 s\n", "quick sort mid pivot");
     printf("\tArraySize: %.0f\t\tInternalCounter: %10.0f\t\tClock: %f\t\tRepetions in 1s: %f\n"
           , timeAverrage[i][0], timeAverrage[i][2], timeAverrage[i][1],  timeAverrage[i][3]);
   }

@@ -46,7 +46,7 @@ int * createSortedArrayRandomNumbers(int n, int max)
           swap(&array[j], &array[j+1]);
   }
 
-  bubbleSort(array, n)
+  bubbleSort(array, n);
 
   return array;
 }
@@ -57,8 +57,8 @@ void reverseArray(int *array, int length)
   for(int i = 0; i<length/2; i++)
   {
     aux = array[i];
-    array[i] = array[n-i-1];
-    array[n-i-1] = aux;
+    array[i] = array[length-i-1];
+    array[length-i-1] = aux;
   }
 }
 
@@ -79,7 +79,7 @@ int * createSortedArray(int n)
   return array;
 }
 
-int * createSortedArrayReversed(int n)
+int * createReversedArray(int n)
 {
 
   int * array, i;

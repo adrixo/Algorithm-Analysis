@@ -25,10 +25,13 @@ RecursiveFunctions_Test: tests/studyFunctions/recursiveFunctions_Test.c
 bubbleSort_Test: tests/sortingAlgorithm/bubbleSort_Test.c utils/array.o src/sortingAlgorithm/bubbleSort.o
 	$(CC) -o bubbleSort_Test.exe tests/sortingAlgorithm/bubbleSort_Test.c utils/array.o src/sortingAlgorithm/sortingAlgorithm/bubbleSort.o
 
+insertionSort_Test: tests/sortingAlgorithm/insertionSort_Test.c
+	$(CC) -o insertionSort_Test.exe tests/sortingAlgorithm/insertionSort_Test.c
+
 
 #Algorithmic schemes
 greedyAlgorithms_Test: tests/algorithmicSchemes/greedyAlgorithms_Test.c
-	$(CC) -o greedyAlgorithms_Test.exe tests/algorithmicSchemes/greedyAlgorithms_Test.c 
+	$(CC) -o greedyAlgorithms_Test.exe tests/algorithmicSchemes/greedyAlgorithms_Test.c
 
 #
 timeCountingBase: tests/timeCountingBase.c utils/array.o src/XX/XX.o

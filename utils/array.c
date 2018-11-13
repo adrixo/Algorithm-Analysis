@@ -91,7 +91,7 @@ int * createSortedArrayReversed(int n)
   }
 
   for(i = n-1; i >= 0; i--)
-    array[i] = i;
+    array[n-1-i] = i;
 
   return array;
 }

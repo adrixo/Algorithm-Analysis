@@ -1,152 +1,62 @@
+// Implementing bubbleSort
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
 
-#include "../../src/sortingAlgorithm/insertionSort.c"
 #include "../../utils/array.c"
+#include "../../src/sortingAlgorithm/insertionSort.c"
 
-#define TESTS 5
-#define REPETITIONS 10
+#define TESTS 12
+#define REPETITIONS 20
 
 void main(void)
 {
-  clock_t global_clock = clock();
-
   clock_t clock_start, clock_end;
   double clock_total;
   int i, j;
-  int testSize[TESTS] = { 1000, 5000, 10000, 20000, 50000};
-  int *arrayRandomDirect;
-  int *arrayRandomBinary;
-  int *sortedArray;
-  int *reversedArrayDirect;
-  int *reversedArraybinary;
+  int internalCounter, testSize[TESTS] = { 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 5500, 6000};
+  int *array;
 
-  int internalCounterDirect, internalCounterBinary;
+  double **timeAverrage;
 
-  double **timeAverrageDirect;
-  double **timeAverrageBinary;
+  timeAverrage = (double **) malloc(TESTS * sizeof(double*)); if(timeAverrage==NULL) printf("timeAverrage: malloc problem\n");
+  for(int i = 0; i < TESTS; i++) timeAverrage[i] = (double *) malloc(REPETITIONS * sizeof(double));
+  // This array is used to calc the time average of an amount of attemps on the same algorithm operating on an array of specific size
+  // But later its used as a matrix to place the info that is going to be presented on a external file
 
-  timeAverrageDirect = (double **) malloc(TESTS * sizeof(double*)); if(timeAverrageDirect==NULL) printf("timeAverrage: malloc problem\n");
-  for(int i = 0; i < TESTS; i++) timeAverrageDirect[i] = (double *) malloc(REPETITIONS * sizeof(double));
+  printf("\nInsertion Sort: \n\n");
 
-  timeAverrageBinary = (double **) malloc(TESTS * sizeof(double*)); if(timeAverrageBinary==NULL) printf("timeAverrage: malloc problem\n");
-  for(int i = 0; i < TESTS; i++) timeAverrageBinary[i] = (double *) malloc(REPETITIONS * sizeof(double));
-
-  printf("\n Insertion Sorting: Direct (1.) vs binary (2.): \n\n");
-
-/* Middle case */
-  printf("\n[Middle case] - array with random numbers:\n");
   for(i=0; i<TESTS; i++)
   {
-    for(j=0; j<REPETITIONS; j++)
+    for(j=0; j<REPETITIONS; j++) //we want the average of the total clock
     {
-      arrayRandomDirect = createArrayRandomNumbers(testSize[i], testSize[i]);
-      arrayRandomBinary = duplicateArray(arrayRandomDirect, testSize[i]);
+      array = createArrayRandomNumbers(testSize[i], testSize[i]);
 
       clock_start = clock();
-      internalCounterDirect = insertionSort( arrayRandomDirect, testSize[i]);
+      internalCounter = insertionSort( array, testSize[i]);
       clock_end = clock();
-      clock_total = (clock_end - clock_start) / (double) CLOCKS_PER_SEC;
-      timeAverrageDirect[i][j] = clock_total;
 
-      clock_start = clock();
-      internalCounterBinary = binaryInsertionSort( arrayRandomBinary, testSize[i]);
-      clock_end = clock();
       clock_total = (clock_end - clock_start) / (double) CLOCKS_PER_SEC;
-      timeAverrageBinary[i][j] = clock_total;
-
-      free(arrayRandomDirect);
-      free(arrayRandomBinary);
+      timeAverrage[i][j] = clock_total;
+      free(array);
     }
 
-    for(j=1; j<REPETITIONS; j++){
-      timeAverrageDirect[i][0] += timeAverrageDirect[i][j];
-      timeAverrageBinary[i][0] += timeAverrageBinary[i][j];
-    }
-    timeAverrageDirect[i][0] /= REPETITIONS;
-    timeAverrageBinary[i][0] /= REPETITIONS;
+    //calc of time average and prepare the matrix
+    for(j=1; j<REPETITIONS; j++)
+      timeAverrage[i][0] += timeAverrage[i][j];
+    timeAverrage[i][0] /= REPETITIONS;
 
-    printf("1.Size: %d\t\tInternalCounter: %10d\t\tClock: %f\t\tRepetions in 1s: %f\n", testSize[i], internalCounterDirect, timeAverrageDirect[i][0], 1/timeAverrageDirect[i][0] );
-    printf("2.Size: %d\t\tInternalCounter: %10d\t\tClock: %f\t\tRepetions in 1s: %f\n\n", testSize[i], internalCounterBinary, timeAverrageBinary[i][0], 1/timeAverrageBinary[i][0]);
+    timeAverrage[i][1] = timeAverrage[i][0]; //time average on the second
+    timeAverrage[i][0] = testSize[i];  //Array size on the first
+    timeAverrage[i][2] = internalCounter; //number of operations on the third
+
+    //And number that times that an algorithm can be run in 1s (1/timeAverrage)
+    timeAverrage[i][3] =  1/timeAverrage[i][1];
+
+    createArrayFileFromMatrix(timeAverrage, TESTS, 4, "array size ;clock average ;internal counter ;executions in 1 s\n", "Insertion sort");
+    printf("\tArraySize: %.0f\t\tInternalCounter: %10.0f\t\tClock: %f\t\tRepetions in 1s: %f\n"
+          , timeAverrage[i][0], timeAverrage[i][2], timeAverrage[i][1],  timeAverrage[i][3]);
   }
-
-/* Best case */
-  printf("\n[Best case] - Sorted array:\n");
-  for(i=0; i<TESTS; i++)
-  {
-    for(j=0; j<REPETITIONS; j++)
-    {
-
-      sortedArray = createSortedArray(testSize[i]);
-
-      clock_start = clock();
-      internalCounterDirect = insertionSort( sortedArray, testSize[i]);
-      clock_end = clock();
-      clock_total = (clock_end - clock_start) / (double) CLOCKS_PER_SEC;
-      timeAverrageDirect[i][j] = clock_total;
-
-      clock_start = clock();
-      internalCounterBinary = binaryInsertionSort( sortedArray, testSize[i]);
-      clock_end = clock();
-      clock_total = (clock_end - clock_start) / (double) CLOCKS_PER_SEC;
-      timeAverrageBinary[i][j] = clock_total;
-
-      free(sortedArray);
-    }
-
-    for(j=1; j<REPETITIONS; j++){
-      timeAverrageDirect[i][0] += timeAverrageDirect[i][j];
-      timeAverrageBinary[i][0] += timeAverrageBinary[i][j];
-    }
-    timeAverrageDirect[i][0] /= REPETITIONS;
-    timeAverrageBinary[i][0] /= REPETITIONS;
-
-    printf("1.Size: %d\t\tInternalCounter: %10d\t\tClock: %f\t\tRepetions in 1s: %f\n", testSize[i], internalCounterDirect, timeAverrageDirect[i][0], 1/timeAverrageDirect[i][0]);
-    printf("2.Size: %d\t\tInternalCounter: %10d\t\tClock: %f\t\tRepetions in 1s: %f\n\n", testSize[i], internalCounterBinary, timeAverrageBinary[i][0], 1/timeAverrageBinary[i][0]);
-  }
-
-/* worst case */
-  int repetitionsWorstCase = REPETITIONS;
-  repetitionsWorstCase = 2;
-  printf("\n[Best case] - Array sorted backwards:\n");
-  for(i=0; i<TESTS; i++)
-  {
-    for(j=0; j<repetitionsWorstCase; j++)
-    {
-
-      reversedArrayDirect = createReversedArray(testSize[i]);
-      reversedArraybinary = createReversedArray(testSize[i]);
-
-      clock_start = clock();
-      internalCounterDirect = insertionSort( reversedArrayDirect, testSize[i]);
-      clock_end = clock();
-      clock_total = (clock_end - clock_start) / (double) CLOCKS_PER_SEC;
-      timeAverrageDirect[i][j] = clock_total;
-
-      clock_start = clock();
-      internalCounterBinary = binaryInsertionSort( reversedArraybinary, testSize[i]);
-      clock_end = clock();
-      clock_total = (clock_end - clock_start) / (double) CLOCKS_PER_SEC;
-      timeAverrageBinary[i][j] = clock_total;
-
-      free(reversedArrayDirect);
-      free(reversedArraybinary);
-    }
-
-    //Calculamos las medias de los tiempos
-    for(j=1; j<repetitionsWorstCase; j++){
-      timeAverrageDirect[i][0] += timeAverrageDirect[i][j];
-      timeAverrageBinary[i][0] += timeAverrageBinary[i][j];
-    }
-    timeAverrageDirect[i][0] /= repetitionsWorstCase;
-    timeAverrageBinary[i][0] /= repetitionsWorstCase;
-
-    printf("1.Size: %d\t\tInternalCounter: %10d\t\tClock: %f\t\tRepetions in 1s: %f\n", testSize[i], internalCounterDirect, timeAverrageDirect[i][0], 1/timeAverrageDirect[i][0]);
-    printf("2.Size: %d\t\tInternalCounter: %10d\t\tClock: %f\t\tRepetions in 1s: %f\n\n", testSize[i], internalCounterBinary, timeAverrageBinary[i][0], 1/timeAverrageBinary[i][0]);
-  }
-
-  clock_end = clock();
-  clock_total = (clock_end - global_clock) / (double) CLOCKS_PER_SEC;
-  printf("Execution time: %f\n", clock_total);
 }

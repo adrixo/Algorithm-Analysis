@@ -2,6 +2,7 @@
 CC = gcc
 # CFLAGS =
 
+
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
@@ -21,12 +22,21 @@ RecursiveFunctions_Test: tests/studyFunctions/recursiveFunctions_Test.c
 
 #
 
-#Sorting algorithms
+#Sorting algorithms tests/sortingAlgorithm/sortTest.c
+sortTest: tests/sortingAlgorithm/sortTest.c
+	$(CC) -o sortTest_Test.exe tests/sortingAlgorithm/sortTest.c
+
 bubbleSort_Test: tests/sortingAlgorithm/bubbleSort_Test.c utils/array.o src/sortingAlgorithm/bubbleSort.o
-	$(CC) -o bubbleSort_Test.exe tests/sortingAlgorithm/bubbleSort_Test.c utils/array.o src/sortingAlgorithm/sortingAlgorithm/bubbleSort.o
+	$(CC) -o bubbleSort_Test.exe tests/sortingAlgorithm/bubbleSort_Test.c utils/array.o src/sortingAlgorithm/bubbleSort.o
 
 insertionSort_Test: tests/sortingAlgorithm/insertionSort_Test.c
 	$(CC) -o insertionSort_Test.exe tests/sortingAlgorithm/insertionSort_Test.c
+
+selectionSort_Test: tests/sortingAlgorithm/selectionSort_Test.c
+	$(CC) -o selectionSort_Test.exe tests/sortingAlgorithm/selectionSort_Test.c
+
+insertionSortComparation_Test: tests/sortingAlgorithm/insertionSortComparation_Test.c
+	$(CC) -o insertionSortComparation_Test.exe tests/sortingAlgorithm/insertionSortComparation_Test.c
 
 
 #Algorithmic schemes
@@ -36,6 +46,9 @@ greedyAlgorithms_Test: tests/algorithmicSchemes/greedyAlgorithms_Test.c
 #
 timeCountingBase: tests/timeCountingBase.c utils/array.o src/XX/XX.o
 	$(CC) -o timeCountingBase.exe tests/timeCountingBase.c utils/array.o src/XX/XX.o
+
+
+all: summationAlgorithms_Test productFunctions_Test RecursiveFunctions_Test sortTest bubbleSort_Test insertionSort_Test selectionSort_Test insertionSortComparation_Test greedyAlgorithms_Test
 
 clean:
 	find . -name "*.o" -type f -delete

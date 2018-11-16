@@ -6,7 +6,7 @@
 #include <string.h>
 
 #include "../../utils/array.c"
-#include "../../src/sortingAlgorithm/mergeSort.c"
+#include "../../src/sortingAlgorithm/radixSort.c"
 
 #define ARRAYSIZE 10
 
@@ -23,7 +23,7 @@ void main(void)
 
   printArray(array, ARRAYSIZE, "Sort test, 1.");
   clock_start = clock();
-  internalCounter = mergeSort( array,0, ARRAYSIZE);    clock_end = clock();
+  internalCounter = radixSort( array, ARRAYSIZE);    clock_end = clock();
   clock_end = clock();
 
   clock_total = (clock_end - clock_start) / (double) CLOCKS_PER_SEC;

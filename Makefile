@@ -44,6 +44,9 @@ quickSort_Test: tests/sortingAlgorithm/quickSort_Test.c
 mergeSort_Test: tests/sortingAlgorithm/mergeSort_Test.c
 	$(CC) -o mergeSort_Test.exe tests/sortingAlgorithm/mergeSort_Test.c
 
+radixSort_Test: tests/sortingAlgorithm/radixSort_Test.c
+	$(CC) -o radixSort_Test.exe tests/sortingAlgorithm/radixSort_Test.c
+
 #Algorithmic schemes
 greedyAlgorithms_Test: tests/algorithmicSchemes/greedyAlgorithms_Test.c
 	$(CC) -o greedyAlgorithms_Test.exe tests/algorithmicSchemes/greedyAlgorithms_Test.c

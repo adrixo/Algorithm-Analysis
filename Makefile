@@ -29,15 +29,20 @@ sortTest: tests/sortingAlgorithm/sortTest.c
 bubbleSort_Test: tests/sortingAlgorithm/bubbleSort_Test.c utils/array.o src/sortingAlgorithm/bubbleSort.o
 	$(CC) -o bubbleSort_Test.exe tests/sortingAlgorithm/bubbleSort_Test.c utils/array.o src/sortingAlgorithm/bubbleSort.o
 
-insertionSort_Test: tests/sortingAlgorithm/insertionSort_Test.c
-	$(CC) -o insertionSort_Test.exe tests/sortingAlgorithm/insertionSort_Test.c
-
 selectionSort_Test: tests/sortingAlgorithm/selectionSort_Test.c
 	$(CC) -o selectionSort_Test.exe tests/sortingAlgorithm/selectionSort_Test.c
+
+insertionSort_Test: tests/sortingAlgorithm/insertionSort_Test.c
+	$(CC) -o insertionSort_Test.exe tests/sortingAlgorithm/insertionSort_Test.c
 
 insertionSortComparation_Test: tests/sortingAlgorithm/insertionSortComparation_Test.c
 	$(CC) -o insertionSortComparation_Test.exe tests/sortingAlgorithm/insertionSortComparation_Test.c
 
+quickSort_Test: tests/sortingAlgorithm/quickSort_Test.c
+	$(CC) -o quickSort_Test.exe tests/sortingAlgorithm/quickSort_Test.c
+
+mergeSort_Test: tests/sortingAlgorithm/mergeSort_Test.c
+	$(CC) -o mergeSort_Test.exe tests/sortingAlgorithm/mergeSort_Test.c
 
 #Algorithmic schemes
 greedyAlgorithms_Test: tests/algorithmicSchemes/greedyAlgorithms_Test.c

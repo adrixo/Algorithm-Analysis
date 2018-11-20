@@ -22,7 +22,7 @@ RecursiveFunctions_Test: tests/studyFunctions/recursiveFunctions_Test.c
 
 #
 
-#Sorting algorithms tests/sortingAlgorithm/sortTest.c
+#Sorting algorithms
 sortTest: tests/sortingAlgorithm/sortTest.c
 	$(CC) -o sortTest_Test.exe tests/sortingAlgorithm/sortTest.c
 
@@ -51,7 +51,10 @@ radixSort_Test: tests/sortingAlgorithm/radixSort_Test.c
 greedyAlgorithms_Test: tests/algorithmicSchemes/greedyAlgorithms_Test.c
 	$(CC) -o greedyAlgorithms_Test.exe tests/algorithmicSchemes/greedyAlgorithms_Test.c
 
+hanoi_Test: tests/algorithmicSchemes/hanoi_Test.c
+	$(CC) -o hanoi_Test.exe tests/algorithmicSchemes/hanoi_Test.c
 #
+
 timeCountingBase: tests/timeCountingBase.c utils/array.o src/XX/XX.o
 	$(CC) -o timeCountingBase.exe tests/timeCountingBase.c utils/array.o src/XX/XX.o
 
